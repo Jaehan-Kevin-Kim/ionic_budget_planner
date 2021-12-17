@@ -44,30 +44,54 @@
               <ion-card-title>New Expense</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-item>
-                <ion-label position="floating"
-                  >Expense Reason
-                  <ion-input type="text"></ion-input>
-                </ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating"
-                  >Expense Amount
-                  <ion-input type="number"></ion-input>
-                </ion-label>
-              </ion-item>
-              <div class="ion-margin-vertical ion-text-right">
-                <ion-button fill="outline" color="danger">
-                  <ion-icon slot="start" name="close"></ion-icon>
-                  Clear</ion-button
-                >
-                <ion-button>
-                  <ion-icon slot="start" name="add-outline"></ion-icon>
-                  Add Expense</ion-button
-                >
-              </div>
+              <form
+                [formGroup]="expenseForm"
+                (ngSubmit)="onSubmit(expenseForm.value)"
+              >
+                <ion-item>
+                  <ion-label for="reason" position="floating"
+                    >Expense Reason
+                    <ion-input
+                      name="reason"
+                      formControlName="reason"
+                      type="text"
+                    ></ion-input>
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label for="amount" position="floating"
+                    >Expense Amount
+                    <ion-input
+                      name="amount"
+                      formControlName="amount"
+                      type="number"
+                    ></ion-input>
+                  </ion-label>
+                </ion-item>
+                <div class="ion-margin-vertical ion-text-right">
+                  <ion-button type="button" fill="outline" color="danger">
+                    <ion-icon slot="start" name="close"></ion-icon>
+                    Clear</ion-button
+                  >
+                  <ion-button type="submit" [disabled]="!expenseForm.valid">
+                    <ion-icon slot="start" name="add-outline"></ion-icon>
+                    Add Expense</ion-button
+                  >
+                </div>
+              </form>
             </ion-card-content>
           </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="">
+        <ion-col size-md="6" offset-md="3">
+          <ion-list id="expenses-list"> </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <p class="ion-margin">Total Expenses: <span>$200</span></p>
+          <!-- <ion-list id="expenses-list"> </ion-list>≈ -->
         </ion-col>
       </ion-row>
     </ion-grid>
